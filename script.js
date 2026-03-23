@@ -2,6 +2,8 @@ const taskInput = document.getElementById("taskInput");
 const addTaskBtn = document.getElementById("addTaskBtn");
 const taskList = document.getElementById("taskList");
 
+let tasks = JSON.parse(localStorage.getItem("studyflow_tasks")) || [];
+
 function addTask() {
   const taskText = taskInput.value.trim();
 
