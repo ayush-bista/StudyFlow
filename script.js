@@ -14,6 +14,16 @@ function renderTasks() {
   tasks.forEach((task, index) => {
     const li = document.createElement("li");
     li.className = "task-item";
+    
+li.innerHTML = `
+      <div style="display:flex; align-items:center; gap:10px;">
+        <input type="checkbox" ${task.completed ? "checked" : ""} data-index="${index}" class="complete-checkbox">
+        <span style="${task.completed ? "text-decoration: line-through; color: gray;" : ""}">
+          ${task.text}
+        </span>
+      </div>
+      <button data-index="${index}">Delete</button>
+    `;
 
     li.innerHTML = `
       <span>${task.text}</span>
