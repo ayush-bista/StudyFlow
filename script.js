@@ -14,8 +14,8 @@ function renderTasks() {
   tasks.forEach((task, index) => {
     const li = document.createElement("li");
     li.className = "task-item";
-    
-li.innerHTML = `
+
+    li.innerHTML = `
       <div style="display:flex; align-items:center; gap:10px;">
         <input type="checkbox" ${task.completed ? "checked" : ""} data-index="${index}" class="complete-checkbox">
         <span style="${task.completed ? "text-decoration: line-through; color: gray;" : ""}">
@@ -25,13 +25,14 @@ li.innerHTML = `
       <button data-index="${index}">Delete</button>
     `;
 
-    li.innerHTML = `
-      <span>${task.text}</span>
-      <button data-index="${index}">Delete</button>
-    `;
-
     li.querySelector("button").addEventListener("click", () => {
       tasks.splice(index, 1);
+      saveTasks();
+      renderTasks();
+    });
+
+    li.querySelector(".complete-checkbox").addEventListener("change", () => {
+      tasks[index].completed = !tasks[index].completed;
       saveTasks();
       renderTasks();
     });
@@ -44,7 +45,7 @@ function addTask() {
   const taskText = taskInput.value.trim();
   if (taskText === "") return;
 
-  tasks.push({ text: taskText });
+  tasks.push({ text: taskText, completed: false });
   saveTasks();
   renderTasks();
   taskInput.value = "";
