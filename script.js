@@ -2,6 +2,11 @@ const taskInput = document.getElementById("taskInput");
 const addTaskBtn = document.getElementById("addTaskBtn");
 const taskList = document.getElementById("taskList");
 
+const timerDisplay = document.getElementById("timerDisplay");
+const startTimer = document.getElementById("startTimer");
+const pauseTimer = document.getElementById("pauseTimer");
+const resetTimer = document.getElementById("resetTimer");
+
 let tasks = JSON.parse(localStorage.getItem("studyflow_tasks")) || [];
 
 function saveTasks() {
@@ -52,9 +57,47 @@ function addTask() {
 }
 
 addTaskBtn.addEventListener("click", addTask);
-
 taskInput.addEventListener("keypress", (e) => {
   if (e.key === "Enter") addTask();
 });
 
 renderTasks();
+
+/* Timer */
+let timeLeft = 25 * 60;
+let timer = null;
+
+function updateTimerDisplay() {
+  const minutes = String(Math.floor(timeLeft / 60)).padStart(2, "0");
+  const seconds = String(timeLeft % 60).padStart(2, "0");
+  timerDisplay.textContent = `${minutes}:${seconds}`;
+}
+
+startTimer.addEventListener("click", () => {
+  if (timer) return;
+
+  timer = setInterval(() => {
+    if (timeLeft > 0) {
+      timeLeft--;
+      updateTimerDisplay();
+    } else {
+      clearInterval(timer);
+      timer = null;
+      alert("Pomodoro complete!");
+    }
+  }, 1000);
+});
+
+pauseTimer.addEventListener("click", () => {
+  clearInterval(timer);
+  timer = null;
+});
+
+resetTimer.addEventListener("click", () => {
+  clearInterval(timer);
+  timer = null;
+  timeLeft = 25 * 60;
+  updateTimerDisplay();
+});
+
+updateTimerDisplay();
