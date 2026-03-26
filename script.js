@@ -7,7 +7,13 @@ const startTimer = document.getElementById("startTimer");
 const pauseTimer = document.getElementById("pauseTimer");
 const resetTimer = document.getElementById("resetTimer");
 
+const notesArea = document.getElementById("notesArea");
+const saveNotesBtn = document.getElementById("saveNotesBtn");
+
 let tasks = JSON.parse(localStorage.getItem("studyflow_tasks")) || [];
+let savedNotes = localStorage.getItem("studyflow_notes") || "";
+
+notesArea.value = savedNotes;
 
 function saveTasks() {
   localStorage.setItem("studyflow_tasks", JSON.stringify(tasks));
@@ -22,12 +28,12 @@ function renderTasks() {
 
     li.innerHTML = `
       <div style="display:flex; align-items:center; gap:10px;">
-        <input type="checkbox" ${task.completed ? "checked" : ""} data-index="${index}" class="complete-checkbox">
+        <input type="checkbox" ${task.completed ? "checked" : ""} class="complete-checkbox">
         <span style="${task.completed ? "text-decoration: line-through; color: gray;" : ""}">
           ${task.text}
         </span>
       </div>
-      <button data-index="${index}">Delete</button>
+      <button>Delete</button>
     `;
 
     li.querySelector("button").addEventListener("click", () => {
@@ -101,3 +107,10 @@ resetTimer.addEventListener("click", () => {
 });
 
 updateTimerDisplay();
+
+/* Notes */
+saveNotesBtn.addEventListener("click", () => {
+  localStorage.setItem("studyflow_notes", notesArea.value);
+  alert("Notes saved successfully!");
+});
+
