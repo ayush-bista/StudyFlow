@@ -115,3 +115,24 @@ h2 {
   background: #111827;
   color: white;
 }
+
+textarea {
+  width: 100%;
+  min-height: 140px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  padding: 12px;
+  resize: vertical;
+  margin-bottom: 10px;
+  outline: none;
+}
+
+.full-btn {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background: #059669;
+  color: white;
+  cursor: pointer;
+}
