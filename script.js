@@ -10,13 +10,27 @@ const resetTimer = document.getElementById("resetTimer");
 const notesArea = document.getElementById("notesArea");
 const saveNotesBtn = document.getElementById("saveNotesBtn");
 
+const totalTasks = document.getElementById("totalTasks");
+const completedTasks = document.getElementById("completedTasks");
+const themeToggle = document.getElementById("themeToggle");
+
 let tasks = JSON.parse(localStorage.getItem("studyflow_tasks")) || [];
 let savedNotes = localStorage.getItem("studyflow_notes") || "";
+let darkMode = JSON.parse(localStorage.getItem("studyflow_darkmode")) || false;
 
 notesArea.value = savedNotes;
 
+if (darkMode) {
+  document.body.classList.add("dark");
+}
+
 function saveTasks() {
   localStorage.setItem("studyflow_tasks", JSON.stringify(tasks));
+}
+
+function updateStats() {
+  totalTasks.textContent = tasks.length;
+  completedTasks.textContent = tasks.filter(task => task.completed).length;
 }
 
 function renderTasks() {
@@ -50,6 +64,8 @@ function renderTasks() {
 
     taskList.appendChild(li);
   });
+
+  updateStats();
 }
 
 function addTask() {
@@ -114,3 +130,11 @@ saveNotesBtn.addEventListener("click", () => {
   alert("Notes saved successfully!");
 });
 
+/* Dark mode */
+themeToggle.addEventListener("click", () => {
+  document.body.classList.toggle("dark");
+  localStorage.setItem(
+    "studyflow_darkmode",
+    JSON.stringify(document.body.classList.contains("dark"))
+  );
+});
