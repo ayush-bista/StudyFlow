@@ -10,60 +10,65 @@
   <div class="container">
     <header>
       <h1>StudyFlow</h1>
-      <p>Your simple student productivity app</p>
-      <button id="themeToggle">Toggle Dark Mode</button>
+      <button id="themeToggle">Toggle Theme</button>
     </header>
 
-    <section class="card">
-      <h2>Progress</h2>
-      <p>Total Tasks: <span id="totalTasks">0</span></p>
-      <p>Completed Tasks: <span id="completedTasks">0</span></p>
-    </section>
-
-    <section class="card">
-      <h2>Add Task</h2>
-      <div class="task-input">
-        <input type="text" id="taskInput" placeholder="Enter a study task..." />
-        <button id="addTaskBtn">Add</button>
-      </div>
-    </section>
-
-    <section class="card">
-      <h2>Tasks</h2>
-      <ul id="taskList"></ul>
-    </section>
-
-    <section class="card">
-      <h2>Pomodoro Timer</h2>
-      <div class="timer-box">
-        <h3 id="timerDisplay">25:00</h3>
-        <div class="timer-buttons">
-          <button id="startTimer">Start</button>
-          <button id="pauseTimer">Pause</button>
-          <button id="resetTimer">Reset</button>
+    <div class="main-content">
+      <section class="card progress-section">
+        <h2>📊 Progress</h2>
+        <div class="stats">
+          <div class="stat-item">
+            <span class="stat-number" id="totalTasks">0</span>
+            <span class="stat-label">Total Tasks</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-number" id="completedTasks">0</span>
+            <span class="stat-label">Completed</span>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="card">
-      <h2>Quick Notes</h2>
-      <textarea id="notesArea" placeholder="Write your notes here..."></textarea>
-      <button id="saveNotesBtn" class="full-btn">Save Notes</button>
-    </section>
+      <section class="card timer-section">
+        <h2>⏱️ Pomodoro Timer</h2>
+        <div class="timer-box">
+          <h3 id="timerDisplay">25:00</h3>
+          <div class="timer-buttons">
+            <button id="startTimer">Start</button>
+            <button id="pauseTimer">Pause</button>
+            <button id="resetTimer">Reset</button>
+          </div>
+        </div>
+      </section>
 
-    <section class="card">
-      <h2>Backup</h2>
-      <div class="timer-buttons">
-        <button id="exportBtn">Export Data</button>
-        <input type="file" id="importFile" accept=".json" />
-      </div>
-    </section>
+      <section class="card add-task-section">
+        <h2>➕ Add New Task</h2>
+        <div class="task-input">
+          <input type="text" id="taskInput" placeholder="What do you need to study?" />
+          <button id="addTaskBtn">Add Task</button>
+        </div>
+      </section>
 
+      <section class="card notes-section">
+        <h2>📝 Quick Notes</h2>
+        <textarea id="notesArea" placeholder="Jot down your thoughts..."></textarea>
+        <button id="saveNotesBtn" class="full-btn">Save Notes</button>
+      </section>
+
+      <section class="card tasks-section">
+        <h2>📋 Your Tasks</h2>
+        <ul id="taskList"></ul>
+      </section>
+
+      <section class="card backup-section">
+        <h2>💾 Data Management</h2>
+        <div class="backup-controls">
+          <button id="exportBtn">Export Data</button>
+          <input type="file" id="importFile" accept=".json" />
+        </div>
+      </section>
+    </div>
   </div>
 
   <script src="script.js"></script>
 </body>
-</html>
-</body>
-</html>
 </html>
