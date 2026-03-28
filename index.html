@@ -10,26 +10,20 @@
   <div class="container">
     <header>
       <h1>StudyFlow</h1>
-      <p>Your simple student productivity app</p>
-      <button id="themeToggle">Toggle Dark Mode</button>
+      <button id="themeToggle">Dark Mode</button>
     </header>
 
     <section class="card">
-      <h2>Progress</h2>
-      <p>Total Tasks: <span id="totalTasks">0</span></p>
-      <p>Completed Tasks: <span id="completedTasks">0</span></p>
-    </section>
-
-    <section class="card">
-      <h2>Add Task</h2>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+        <h2>Tasks</h2>
+        <div class="progress-stats">
+          <span id="totalTasks">0</span> total, <span id="completedTasks">0</span> done
+        </div>
+      </div>
       <div class="task-input">
-        <input type="text" id="taskInput" placeholder="Enter a study task..." />
+        <input type="text" id="taskInput" placeholder="Add a study task..." />
         <button id="addTaskBtn">Add</button>
       </div>
-    </section>
-
-    <section class="card">
-      <h2>Tasks</h2>
       <ul id="taskList"></ul>
     </section>
 
@@ -51,15 +45,9 @@
       <button id="saveNotesBtn" class="full-btn">Save Notes</button>
     </section>
 
-    <section class="card">
-      <h2>Backup</h2>
-      <div class="timer-buttons">
-        <button id="exportBtn">Export Data</button>
-        <input type="file" id="importFile" accept=".json" />
-      </div>
-    </section>
   </div>
 
   <script src="script.js"></script>
 </body>
+</html>
 </html>
