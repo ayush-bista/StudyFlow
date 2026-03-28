@@ -14,6 +14,9 @@ const totalTasks = document.getElementById("totalTasks");
 const completedTasks = document.getElementById("completedTasks");
 const themeToggle = document.getElementById("themeToggle");
 
+const exportBtn = document.getElementById("exportBtn");
+const importFile = document.getElementById("importFile");
+
 let tasks = JSON.parse(localStorage.getItem("studyflow_tasks")) || [];
 let savedNotes = localStorage.getItem("studyflow_notes") || "";
 let darkMode = JSON.parse(localStorage.getItem("studyflow_darkmode")) || false;
@@ -137,4 +140,57 @@ themeToggle.addEventListener("click", () => {
     "studyflow_darkmode",
     JSON.stringify(document.body.classList.contains("dark"))
   );
+});
+
+/* Export */
+exportBtn.addEventListener("click", () => {
+  const data = {
+    tasks,
+    notes: notesArea.value,
+    darkMode: document.body.classList.contains("dark")
+  };
+
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "studyflow-backup.json";
+  a.click();
+
+  URL.revokeObjectURL(url);
+});
+
+/* Import */
+importFile.addEventListener("change", (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+
+  reader.onload = function(event) {
+    try {
+      const data = JSON.parse(event.target.result);
+
+      tasks = data.tasks || [];
+      notesArea.value = data.notes || "";
+      localStorage.setItem("studyflow_notes", notesArea.value);
+
+      if (data.darkMode) {
+        document.body.classList.add("dark");
+      } else {
+        document.body.classList.remove("dark");
+      }
+
+      localStorage.setItem("studyflow_darkmode", JSON.stringify(data.darkMode || false));
+      saveTasks();
+      renderTasks();
+
+      alert("Data imported successfully!");
+    } catch (error) {
+      alert("Invalid backup file.");
+    }
+  };
+
+  reader.readAsText(file);
 });
